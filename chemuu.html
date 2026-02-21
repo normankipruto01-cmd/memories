@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For chemuu 💙</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        font-family: "Georgia", serif;
+        background: radial-gradient(circle at top, #1c2b3a, #000814);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* HEART ANIMATION */
+    .heart {
+        position: absolute;
+        bottom: -20px;
+        width: 20px;
+        height: 20px;
+        background: pink;
+        transform: rotate(45deg);
+        animation: floatUp 6s linear infinite;
+        opacity: 0.8;
+    }
+
+    .heart::before,
+    .heart::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: pink;
+        border-radius: 50%;
+    }
+
+    .heart::before {
+        top: -10px;
+        left: 0;
+    }
+
+    .heart::after {
+        left: -10px;
+        top: 0;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) rotate(45deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-120vh) rotate(45deg);
+            opacity: 0;
+        }
+    }
+
+    /* LOCK SCREEN */
+    .lock {
+        text-align: center;
+        z-index: 5;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+    }
+
+    button {
+        padding: 10px 18px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        background: #87cefa;
+        margin-left: 8px;
+    }
+
+    /* MESSAGE CARD */
+    .card {
+        display: none;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 30px;
+        border-radius: 16px;
+        max-width: 650px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(255, 182, 193, 0.4);
+        z-index: 5;
+        animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+        color: #9fd3ff;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.8;
+        font-style: italic;
+        margin-top: 20px;
+    }
+
+    audio {
+        margin-top: 25px;
+        width: 100%;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- LOCK -->
+<div class="lock" id="lockScreen">
+    <h2>🔒 Enter Passcode</h2>
+    <input type="password" id="passcode" placeholder="Passcode">
+    <button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- MESSAGE -->
+<div class="card" id="loveCard">
+    <h1>Dear chemuu 💙</h1>
+
+    <p>
+        Even in silence, you find a way to speak to my heart.
+        You are the calm thought that returns when the world feels loud,
+        the warmth that lingers long after a moment has passed.
+        Every smile, every memory, every thought of you feels like
+        a gentle reminder that some people leave marks not on time,
+        but on the soul. This is my quiet way of saying —
+        you matter deeply to me love you soo much babe
+        and i want us to spent the rest of our happy momments together❤️❤️
+    </p>
+
+    <audio id="song" controls>
+        <source src="blue-yuang-kai.mp3" type="audio/mp3">
+    </audio>
+</button>
+</div>
+
+<script>
+    const correctPasscode = "chemuu";
+
+    function unlock() {
+        const input = document.getElementById("passcode").value;
+        if (input === correctPasscode) {
+            document.getElementById("lockScreen").style.display = "none";
+            document.getElementById("loveCard").style.display = "block";
+
+            // autoplay after user interaction (browser safe)
+            const song = document.getElementById("song");
+            song.play();
+
+            startHearts();
+        } else {
+            alert("Wrong passcode 💔");
+        }
+    }
+
+    function startHearts() {
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+            heart.style.background = Math.random() > 0.5 ? "pink" : "#ff6fa5";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
